@@ -21,8 +21,6 @@ export const menu = {
 
 
 export default component$(() => {
-    const { pathname } = useLocation();
-    const navigate = useNavigate();
 
   return (
     <>
@@ -33,16 +31,6 @@ export default component$(() => {
         </section>
       </main>
       <footer>
-          <MUIFooter
-              client:load
-              menu={menu}
-              startingPage={pathname as ROUTES}
-              // @ts-ignore
-              onChange$={(page: number) => {
-                  console.log({ page });
-                  navigate.path = Object.values(menu).filter(({index})=>index === page)[0].href;
-              }}
-          />
         <a href="https://www.builder.io/" target="_blank">
           Made with ♡ by Builder.io
         </a>

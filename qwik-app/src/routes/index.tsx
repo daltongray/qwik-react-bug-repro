@@ -1,10 +1,25 @@
 import { component$ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
-import { Link } from '@builder.io/qwik-city';
+import {Link, useLocation, useNavigate} from '@builder.io/qwik-city';
+import {MUIFooter, ROUTES} from "~/integrations/react/layout";
+import {menu} from "~/routes/layout";
 
 export default component$(() => {
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
   return (
     <div>
+
+      <MUIFooter
+          menu={menu}
+          startingPage={pathname as ROUTES}
+          // @ts-ignore
+          onChange$={(page: number) => {
+            console.log({ page });
+            navigate.path = Object.values(menu).filter(({index})=>index === page)[0].href;
+          }}
+      />
       <h1>
         Welcome to Qwik <span class="lightning">⚡️</span>
       </h1>
